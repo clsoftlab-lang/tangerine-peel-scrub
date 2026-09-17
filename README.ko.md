@@ -38,6 +38,37 @@ English: **[README.md](./README.md)**
 
 사용 부위가 `둘 다`이면 그리디 선택으로 상위 추천에 페이스·바디를 각각 최소 1개씩 포함합니다. 각 추천은 점수를 올린 이유를 함께 반환해 화면에 표시합니다. `check.mjs`에서 단위 테스트로 검증합니다(피부타입 일치, 둘 다 커버, 민감도 효과, 향·예산 효과).
 
+## 🤖 AI 기능 (API 연동)
+
+플러그러블 **AI 레이어**가 [`ai/`](./ai/)에 있습니다. **기본은 키·네트워크 없이 동작하는 결정적 한국어 목업**으로, 앱의 제품 데이터와 규칙 기반 추천 엔진을 그대로 재사용해 세 기능이 오프라인에서도 바로 동작합니다. 상단 내비의 **AI 상담**에서 확인하세요.
+
+1. **AI 스킨케어 상담 챗봇** — 피부타입·고민을 입력하면 추천 엔진으로 스크럽을 추천합니다.
+2. **피부타입 추천 설명** — 피부타입 특징과 추천 이유를 설명합니다.
+3. **브랜드 스토리 / 제품 카피 생성** — 업사이클·친환경 가치를 강조한 마케팅 카피를 만듭니다.
+
+모든 답변에는 **의학적·피부과적 진단이 아님**을 명시합니다.
+
+### 실제 Claude 연동 (백엔드 프록시)
+
+브라우저는 절대 키를 보지 않습니다. [`server/`](./server/)의 소형 Node 프록시가 공식 `@anthropic-ai/sdk`로 Claude 를 호출합니다.
+
+```bash
+cd server
+cp .env.example .env      # .env 에 실제 키 입력 (git 제외)
+npm install
+npm start                 # POST /api/ai (기본 :8787)
+```
+
+그다음 [`ai/config.js`](./ai/config.js)에서 엔드포인트를 지정합니다.
+
+```js
+export const AI_ENDPOINT = "http://localhost:8787/api/ai";
+```
+
+- 모델: **`claude-opus-5`**, adaptive thinking, 브라우저로 스트리밍.
+- `AI_ENDPOINT`가 비어 있으면(기본값, `check.mjs`가 검증) 앱은 목업 모드를 유지합니다.
+- **키는 서버 사이드에만.** `ANTHROPIC_API_KEY`는 `server/.env`(git 제외)에만 두며 **브라우저·레포에는 절대** 두지 않습니다. `check.mjs`가 실제 키 형식을 스캔합니다.
+
 ## 로컬 실행
 
 빌드·의존성 없음. ES 모듈은 `file://`이 아닌 `http://`가 필요하므로 폴더를 HTTP 로 서빙합니다.
@@ -62,9 +93,13 @@ app.js              # 라우터 + 뷰 + 인터랙션 (ES 모듈)
 js/recommender.js   # 규칙 기반 피부타입 추천 (단위 테스트)
 js/cart.js          # 장바구니/구독/업사이클 임팩트 계산 (순수 함수)
 js/storage.js       # localStorage 래퍼 (try/catch + 초기화)
+ai/config.js        # AI_ENDPOINT ("" = 목업 모드)
+ai/ai.js            # askAI(): 한국어 목업(추천엔진 재사용) 또는 프록시 스트리밍
+server/index.mjs    # 선택: Node 프록시 → Claude(@anthropic-ai/sdk), 키는 서버에만
+server/package.json / server/.env.example / server/README.md
 data/products.json  # 가상 제품 24개
 data/content.json   # 브랜드 스토리·설문·지속가능성·FAQ
-check.mjs           # 의존성 없는 CI 검증기
+check.mjs           # 의존성 없는 CI 검증기 (AI 키 스캔 포함)
 .github/workflows/ci.yml
 README.md / README.ko.md / LICENSE / .gitignore
 ```

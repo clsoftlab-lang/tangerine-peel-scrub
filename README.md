@@ -38,6 +38,37 @@ Pure, explainable, rule-based scoring in [`js/recommender.js`](./js/recommender.
 
 When area = `both`, a greedy pass guarantees at least one face and one body product in the top picks. Each recommendation returns the reasons that raised its score, shown in the UI. Fully unit-tested in `check.mjs` (skin-type match, both-area coverage, sensitivity effects, scent/budget effects).
 
+## 🤖 AI 기능 (API 연동)
+
+An optional, pluggable **AI layer** lives in [`ai/`](./ai/). **By default it runs a deterministic Korean mock** (no network, no key) that reuses the app's products and the rule-based skin recommender, so all three AI features work offline out of the box. Open **AI 상담** in the nav to try them:
+
+1. **AI 스킨케어 상담 챗봇** — recommends scrubs by skin type / concern using the recommender.
+2. **피부타입 추천 설명** — explains a skin type's traits and why it gets certain picks.
+3. **브랜드 스토리 / 제품 카피 생성** — upcycling- and eco-focused marketing copy.
+
+All AI output is labelled **not medical/dermatological advice**.
+
+### Enable real Claude (backend proxy)
+
+The browser never sees a key. A tiny Node proxy in [`server/`](./server/) calls Claude with the official `@anthropic-ai/sdk`:
+
+```bash
+cd server
+cp .env.example .env      # then put your real key in .env (git-ignored)
+npm install
+npm start                 # serves POST /api/ai on :8787
+```
+
+Then point the front-end at it by setting `AI_ENDPOINT` in [`ai/config.js`](./ai/config.js):
+
+```js
+export const AI_ENDPOINT = "http://localhost:8787/api/ai";
+```
+
+- Model: **`claude-opus-5`**, adaptive thinking, streamed to the browser.
+- With `AI_ENDPOINT` empty (the default, which `check.mjs` asserts), the app stays in mock mode.
+- **Keys are server-side only.** `ANTHROPIC_API_KEY` lives in `server/.env` (git-ignored) — **never** in the browser or the repo. `check.mjs` scans the tree for real key formats.
+
 ## Run locally
 
 No build step, no dependencies. Serve the folder over HTTP (ES modules need `http://`, not `file://`):
@@ -62,9 +93,13 @@ app.js              # router + views + interactions (ES module)
 js/recommender.js   # rule-based skin-type recommender (unit-tested)
 js/cart.js          # cart / subscription / upcycle-impact math (pure)
 js/storage.js       # localStorage wrapper (try/catch + reset)
+ai/config.js        # AI_ENDPOINT ("" = mock mode)
+ai/ai.js            # askAI(): Korean mock (reuses recommender) or streaming proxy
+server/index.mjs    # optional Node proxy → Claude (@anthropic-ai/sdk), keys server-side
+server/package.json / server/.env.example / server/README.md
 data/products.json  # 24 fictional products
 data/content.json   # brand story, survey, sustainability, FAQ
-check.mjs           # dependency-free CI verifier
+check.mjs           # dependency-free CI verifier (incl. AI key scan)
 .github/workflows/ci.yml
 README.md / README.ko.md / LICENSE / .gitignore
 ```

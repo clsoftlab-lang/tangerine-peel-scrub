@@ -15,6 +15,7 @@ import { join, dirname, extname } from "node:path";
 import { fileURLToPath } from "node:url";
 import { recommend, scoreProduct } from "./js/recommender.js";
 import { summarize, addToCart, setQty, peelToTangerines } from "./js/cart.js";
+import { AI_ENDPOINT } from "./ai/config.js";
 
 const ROOT = dirname(fileURLToPath(import.meta.url));
 let pass = 0, fail = 0;
@@ -62,6 +63,7 @@ for (const needle of [
   'id="cart-badge"', 'id="wish-badge"',
   'data-nav="home"', 'data-nav="catalog"', 'data-nav="survey"',
   'data-nav="sustainability"', 'data-nav="cart"', 'data-nav="wishlist"',
+  'data-nav="ai"',
   './app.js',
 ]) {
   assert(html.includes(needle), `포함: ${needle}`);
@@ -180,6 +182,36 @@ const id0 = products[0].id, id1 = products[1].id;
   assert(s.peelGrams === products[0].peelGrams * 2, "peelGrams 수량 반영 합산");
   assert(peelToTangerines(820) === 10, "껍질 환산(820g → 감귤 10개)");
 }
+
+// 7) AI 레이어 검증 ----------------------------------------------------------
+console.log("\n[7] AI 레이어 (보안 + 문법)");
+
+// (a) ai/ + server/ node --check (명시적 재검증)
+for (const sub of ["ai", "server"]) {
+  const dir = join(ROOT, sub);
+  let subFiles = [];
+  try { subFiles = walk(dir); } catch { bad(`디렉터리 존재: ${sub}/`); continue; }
+  for (const f of subFiles.filter((f) => [".js", ".mjs"].includes(extname(f)))) {
+    try {
+      execSync(`node --check "${f}"`, { stdio: "pipe" });
+      ok(`AI 문법: ${rel(f)}`);
+    } catch (e) { bad(`AI 문법: ${rel(f)}`, String(e.stderr || e.message).slice(0, 200)); }
+  }
+}
+
+// (b) AI_ENDPOINT 는 데모(목업) 모드용 빈 문자열이어야 함
+assert(AI_ENDPOINT === "", "AI_ENDPOINT 빈 문자열(데모=목업 모드)");
+
+// (c) 실제 API 키 형식 유출 스캔 (sk-ant- + 20자 이상)
+const keyRe = new RegExp("sk-" + "ant-[A-Za-z0-9_-]{20,}");
+let keyLeak = "";
+for (const f of files) {
+  if ([".png", ".jpg", ".jpeg", ".gif", ".ico", ".webp"].includes(extname(f))) continue;
+  let txt = "";
+  try { txt = readFileSync(f, "utf8"); } catch { continue; }
+  if (keyRe.test(txt)) { keyLeak = rel(f); break; }
+}
+assert(keyLeak === "", `실제 API 키 형식 미포함${keyLeak ? " — 발견: " + keyLeak : ""}`);
 
 // 결과 -----------------------------------------------------------------------
 console.log(`\n결과: ${pass} 통과 / ${fail} 실패`);

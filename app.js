@@ -10,6 +10,7 @@
 import { recommend } from "./js/recommender.js";
 import { loadState, saveState, resetState } from "./js/storage.js";
 import { summarize, addToCart, setQty, removeFromCart, peelToTangerines } from "./js/cart.js";
+import { askAI } from "./ai/ai.js";
 
 const $ = (sel, root = document) => root.querySelector(sel);
 const $$ = (sel, root = document) => [...root.querySelectorAll(sel)];
@@ -111,6 +112,7 @@ function router() {
   const map = {
     "": renderHome, home: renderHome, catalog: renderCatalog, survey: renderSurvey,
     sustainability: renderSustainability, cart: renderCart, wishlist: renderWishlist,
+    ai: renderAI,
     product: () => renderProduct(param),
   };
   const fn = map[route] || renderHome;
@@ -384,6 +386,95 @@ function renderWishlist() {
   </section>`;
 }
 
+// ---- 뷰: AI 스킨케어 스튜디오 -----------------------------------------------
+function renderAI() {
+  const skinOpts = ["건성", "지성", "복합", "민감성", "트러블성"].map((s) => `<option value="${s}">${s}</option>`).join("");
+  const prodOpts = state.products.map((p) => `<option value="${esc(p.id)}">${esc(p.name)}</option>`).join("");
+  return `
+  <section class="ai-page">
+    <div class="section-head"><h2>AI 스킨케어 스튜디오</h2><span class="pill pill-eco">데모 · 목업</span></div>
+    <p class="lead">아래 기능은 기본적으로 <b>목업(mock)</b>으로 동작합니다. 백엔드 프록시(<code>server/</code>)를 연결하면 실제 Claude 응답으로 전환됩니다.</p>
+    <p class="muted small">※ 모든 답변은 규칙 기반/생성 데모이며 의학적·피부과적 진단이 아닙니다. 키는 서버에만 두며 브라우저에 노출하지 않습니다.</p>
+
+    <article class="ai-card">
+      <h3>1) AI 스킨케어 상담 챗봇</h3>
+      <p class="muted small">피부타입·고민을 입력하면 추천 엔진으로 스크럽을 추천합니다.</p>
+      <div class="ai-controls">
+        <label class="ai-field">피부타입
+          <select id="ai-chat-skin" aria-label="피부타입">${skinOpts}</select>
+        </label>
+        <input id="ai-chat-msg" type="text" placeholder="예: 각질과 모공이 고민이에요" aria-label="고민 입력">
+        <button id="ai-chat-send" class="btn btn-primary btn-sm">상담하기</button>
+      </div>
+      <div id="ai-chat-out" class="ai-out" aria-live="polite"></div>
+    </article>
+
+    <article class="ai-card">
+      <h3>2) 피부타입 추천 설명</h3>
+      <p class="muted small">선택한 피부타입의 특징과 추천 이유를 설명합니다.</p>
+      <div class="ai-controls">
+        <label class="ai-field">피부타입
+          <select id="ai-explain-skin" aria-label="설명할 피부타입">${skinOpts}</select>
+        </label>
+        <button id="ai-explain-go" class="btn btn-primary btn-sm">설명 생성</button>
+      </div>
+      <div id="ai-explain-out" class="ai-out" aria-live="polite"></div>
+    </article>
+
+    <article class="ai-card">
+      <h3>3) 브랜드 스토리 · 제품 카피 생성</h3>
+      <p class="muted small">업사이클·친환경 가치를 강조한 마케팅 카피를 만듭니다.</p>
+      <div class="ai-controls">
+        <label class="ai-field">대상
+          <select id="ai-copy-target" aria-label="카피 대상">
+            <option value="brand">브랜드 스토리</option>
+            ${prodOpts}
+          </select>
+        </label>
+        <button id="ai-copy-go" class="btn btn-primary btn-sm">카피 생성</button>
+      </div>
+      <div id="ai-copy-out" class="ai-out" aria-live="polite"></div>
+    </article>
+  </section>`;
+}
+
+function wireAI() {
+  const run = (btnSel, outSel, task, buildPayload) => {
+    const btn = $(btnSel), out = $(outSel);
+    if (!btn || !out) return;
+    btn.addEventListener("click", async () => {
+      btn.disabled = true;
+      out.textContent = "";
+      out.classList.add("streaming");
+      try {
+        await askAI(task, buildPayload(), { onToken: (t) => { out.textContent += t; } });
+      } catch (e) {
+        out.textContent = "AI 응답을 불러오지 못했습니다: " + (e && e.message ? e.message : String(e));
+      } finally {
+        btn.disabled = false;
+        out.classList.remove("streaming");
+      }
+    });
+  };
+
+  run("#ai-chat-send", "#ai-chat-out", "chat", () => ({
+    message: $("#ai-chat-msg")?.value || "",
+    skinType: $("#ai-chat-skin")?.value,
+    products: state.products,
+  }));
+
+  run("#ai-explain-go", "#ai-explain-out", "explain", () => ({
+    skinType: $("#ai-explain-skin")?.value,
+    products: state.products,
+  }));
+
+  run("#ai-copy-go", "#ai-copy-out", "copy", () => {
+    const target = $("#ai-copy-target")?.value;
+    if (target === "brand") return { kind: "brand", brandStory: state.content?.brandStory };
+    return { kind: "product", product: state.products.find((p) => p.id === target), products: state.products };
+  });
+}
+
 // ---- 이벤트 배선 ------------------------------------------------------------
 function wireView(route) {
   // 담기 / 찜 / 구독 (위임)
@@ -393,6 +484,7 @@ function wireView(route) {
   if (route === "survey") wireSurvey();
   if (route === "cart") wireCart();
   if (route === "sustainability") animateCounters();
+  if (route === "ai") wireAI();
 }
 
 function onViewClick(e) {

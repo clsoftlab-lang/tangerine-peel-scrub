@@ -1,0 +1,19 @@
+{
+  "name": "gyulgyeol-ai-proxy",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "귤결(GyulGyeol) AI 백엔드 프록시 — 브라우저에 키를 노출하지 않고 Claude 를 호출",
+  "license": "Apache-2.0",
+  "author": "CLSOFTLAB (씨엘소프트랩), Dr. Lee Il-guk (이일국)",
+  "main": "index.mjs",
+  "scripts": {
+    "start": "node index.mjs"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.70.0"
+  }
+}
