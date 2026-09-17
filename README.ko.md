@@ -65,9 +65,31 @@ npm start                 # POST /api/ai (기본 :8787)
 export const AI_ENDPOINT = "http://localhost:8787/api/ai";
 ```
 
-- 모델: **`claude-opus-5`**, adaptive thinking, 브라우저로 스트리밍.
+- 모델: 기본 **`claude-haiku-4-5`**(비용 우선, `AI_MODEL`로 상향 가능), 브라우저로 스트리밍.
 - `AI_ENDPOINT`가 비어 있으면(기본값, `check.mjs`가 검증) 앱은 목업 모드를 유지합니다.
 - **키는 서버 사이드에만.** `ANTHROPIC_API_KEY`는 `server/.env`(git 제외)에만 두며 **브라우저·레포에는 절대** 두지 않습니다. `check.mjs`가 실제 키 형식을 스캔합니다.
+
+## ⚙️ 고도화 — 무인·저비용 실 AI 연동
+
+기존 모든 기능을 그대로 유지하면서 AI 레이어를 **무인(autonomous)·저비용 실 Claude** 연동으로
+고도화했습니다. 상세는 [`server/README.md`](./server/README.md) 참조.
+
+- **비용 모델** — 기본 **`claude-haiku-4-5`**(**$1 / $5 per MTok** 입력/출력) + **프롬프트 캐싱**
+  (태스크별 고정 시스템 프롬프트를 `ephemeral` 캐시 블록으로 전송해 반복 호출 비용 절감) +
+  태스크당 출력 상한(~700 토큰) + **월 토큰 예산**(`AI_MONTHLY_TOKEN_CAP`, 기본 2,000,000) +
+  IP당 분당 20회 레이트리밋. 품질이 필요하면 `AI_MODEL=claude-sonnet-5` / `claude-opus-5`.
+- **대략 비용** — 짧은 태스크(입력 ~2K + 출력 ~0.5K) 기준 **1,000요청당 약 $3–5**, 프롬프트
+  캐싱으로 더 낮아집니다. 월 예산 초과 시 프록시가 HTTP 429 `{fallback:true}` 를 반환합니다.
+- **무료 원클릭 배포(무인)** — **Cloudflare Workers** 변형 [`server/worker.js`](./server/worker.js)
+  (+ `wrangler.toml`)가 동일한 태스크 라우팅·모델·캐싱 규칙으로 Anthropic REST 를 호출합니다.
+  관리할 서버가 없습니다: `wrangler secret put ANTHROPIC_API_KEY` 후 `wrangler deploy`.
+- **절대 안 깨짐(무단 폴백)** — 엔드포인트 실패·429 `{fallback:true}`·네트워크 오류이면
+  `ai/ai.js`가 **오프라인 목업으로 자동 폴백**해 앱이 항상 응답합니다.
+- **무단 자동 기능** — 홈 진입 시 **"피부 맞춤 오늘의 추천 (계절 기반)"** 다이제스트를 규칙 기반
+  추천 엔진 + `askAI("digest", …)`로 자동 생성합니다. 오프라인 목업으로도 동작하며,
+  **의학적·피부과적 진단이 아님**을 명시합니다.
+
+**API keys are server-side only — never in the browser or repo.**
 
 ## 로컬 실행
 
@@ -95,8 +117,9 @@ js/cart.js          # 장바구니/구독/업사이클 임팩트 계산 (순수 
 js/storage.js       # localStorage 래퍼 (try/catch + 초기화)
 ai/config.js        # AI_ENDPOINT ("" = 목업 모드)
 ai/ai.js            # askAI(): 한국어 목업(추천엔진 재사용) 또는 프록시 스트리밍
-server/index.mjs    # 선택: Node 프록시 → Claude(@anthropic-ai/sdk), 키는 서버에만
-server/package.json / server/.env.example / server/README.md
+server/index.mjs    # 선택: Node 프록시 → Claude(비용우선 haiku·캐싱·예산), 키는 서버에만
+server/worker.js    # Cloudflare Workers 변형(무료·무인) → Anthropic REST
+server/wrangler.toml / server/package.json / server/.env.example / server/README.md
 data/products.json  # 가상 제품 24개
 data/content.json   # 브랜드 스토리·설문·지속가능성·FAQ
 check.mjs           # 의존성 없는 CI 검증기 (AI 키 스캔 포함)

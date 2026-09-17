@@ -122,6 +122,41 @@ function router() {
   window.scrollTo(0, 0);
 }
 
+// ---- 무단(autonomous) 기능: 계절 기반 "오늘의 추천" -------------------------
+// 현재 월로 계절을 판정하고, 계절별 피부 흐름을 추천 엔진 payload 로 매핑한다.
+function seasonalContext() {
+  const m = new Date().getMonth() + 1;
+  let season, skinType, sensitivity, focus;
+  if (m >= 3 && m <= 5) { season = "봄"; skinType = "복합"; sensitivity = "med"; focus = "환절기 각질·민감 정돈"; }
+  else if (m >= 6 && m <= 8) { season = "여름"; skinType = "지성"; sensitivity = "med"; focus = "피지·모공 산뜻 케어"; }
+  else if (m >= 9 && m <= 11) { season = "가을"; skinType = "건성"; sensitivity = "med"; focus = "환절기 건조 대비 순한 각질"; }
+  else { season = "겨울"; skinType = "건성"; sensitivity = "high"; focus = "보습·저자극 각질 관리"; }
+  return { season, skinType, sensitivity, focus };
+}
+
+// 홈 진입 시 자동 실행: askAI("digest") → 목업/실연동 모두 동작(원격 실패 시 자동 폴백).
+async function wireHomeDigest() {
+  const out = $("#today-rec-out");
+  if (!out) return;
+  const ctx = seasonalContext();
+  out.textContent = "";
+  out.classList.add("streaming");
+  try {
+    await askAI("digest", {
+      season: ctx.season,
+      focus: ctx.focus,
+      skinType: ctx.skinType,
+      sensitivity: ctx.sensitivity,
+      products: state.products,
+    }, { onToken: (t) => { out.textContent += t; } });
+  } catch (_e) {
+    // 무단 안전장치(askAI 가 이미 폴백하지만 최후 방어): 앱을 깨뜨리지 않는다.
+    out.textContent = `${ctx.season} 맞춤 추천을 지금은 불러오지 못했어요. 피부진단에서 바로 추천을 받아보세요.`;
+  } finally {
+    out.classList.remove("streaming");
+  }
+}
+
 // ---- 뷰: 홈/브랜드 스토리 ---------------------------------------------------
 function renderHome() {
   const s = state.content.brandStory;
@@ -138,6 +173,14 @@ function renderHome() {
       </div>
     </div>
     <div class="hero-art">${svgTangerine(7)}</div>
+  </section>
+  <section class="today-rec" aria-label="피부 맞춤 오늘의 추천 (계절 기반)">
+    <div class="today-head">
+      <span class="pill pill-eco">AI · 자동</span>
+      <h2>피부 맞춤 오늘의 추천 <small class="muted">(계절 기반)</small></h2>
+    </div>
+    <p id="today-rec-out" class="today-out" role="status" aria-live="polite">${esc(seasonalContext().season)} 맞춤 추천을 준비하고 있어요…</p>
+    <p class="muted small">※ 규칙 기반/생성 데모이며 의학적·피부과적 진단이 아닙니다. 앱 로드 시 자동 생성(무단), 오프라인 목업으로도 동작합니다.</p>
   </section>
   <section class="story-grid">
     ${s.sections.map((sec) => `
@@ -480,6 +523,7 @@ function wireView(route) {
   // 담기 / 찜 / 구독 (위임)
   $("#view").addEventListener("click", onViewClick);
 
+  if (route === "" || route === "home") wireHomeDigest();
   if (route === "catalog") wireCatalog();
   if (route === "survey") wireSurvey();
   if (route === "cart") wireCart();

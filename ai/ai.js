@@ -14,6 +14,10 @@
 //   "chat"    : AI 스킨케어 상담 챗봇 (피부타입/고민 → 제품 추천)
 //   "explain" : 피부타입 추천 설명
 //   "copy"    : 브랜드 스토리 / 제품 카피 생성 (업사이클·친환경 강조)
+//   "digest"  : 계절 기반 "오늘의 추천" 자동 다이제스트 (온로드 무단 기능)
+//
+// 무단(autonomous) 안전장치: 원격 프록시가 실패/429{fallback:true}/네트워크 오류이면
+//   자동으로 목업으로 폴백해 앱이 절대 깨지지 않는다. onToken 스트리밍은 유지.
 //
 // 모든 답변은 의학적 진단이 아님을 명시한다(라벨).
 // -----------------------------------------------------------------------------
@@ -32,7 +36,12 @@ const NOT_MEDICAL = "※ 규칙 기반/생성 데모이며 의학적·피부과�
  */
 export async function askAI(task, payload = {}, { onToken } = {}) {
   if (!AI_ENDPOINT) return mockProvider(task, payload, onToken);
-  return remoteProvider(task, payload, onToken);
+  try {
+    return await remoteProvider(task, payload, onToken);
+  } catch (_e) {
+    // 무단 안전장치: 원격 실패/429/네트워크 오류 → 목업으로 자동 폴백(앱 불파손).
+    return mockProvider(task, payload, onToken);
+  }
 }
 
 // ---- 실연동: 백엔드 프록시 스트리밍 -----------------------------------------
@@ -67,6 +76,7 @@ async function mockProvider(task, payload, onToken) {
   switch (task) {
     case "explain": text = mockExplain(payload); break;
     case "copy": text = mockCopy(payload); break;
+    case "digest": text = mockDigest(payload); break;
     case "chat":
     default: text = mockChat(payload); break;
   }
@@ -170,6 +180,38 @@ function mockExplain(p) {
   out.push("");
   out.push(NOT_MEDICAL);
   return out.join("\n");
+}
+
+// 온로드 무단 기능: 계절 흐름을 고려한 "오늘의 추천" 다이제스트(추천 엔진 재사용).
+function mockDigest(p) {
+  const products = getProducts(p);
+  const season = p.season || "이번 계절";
+  const focus = p.focus || "각질 정돈";
+  const skinType = p.skinType || "복합";
+  const survey = {
+    skinType,
+    area: "both",
+    sensitivity: p.sensitivity || "med",
+    scent: "무관",
+    vegan: true,
+    budget: 0,
+  };
+  const { picks } = recommend(survey, products, { max: 2 });
+  const lines = [];
+  lines.push(`🍊 ${season} 피부 맞춤 오늘의 추천 — ${focus}`);
+  if (!products.length || !picks.length) {
+    lines.push("지금은 추천 데이터를 불러오지 못했어요. 피부진단에서 맞춤 추천을 받아보세요.");
+  } else {
+    lines.push(`${season}엔 ${skinType} 결의 피부 흐름을 고려해 아래 스크럽을 골랐어요:`);
+    picks.forEach((x, i) => {
+      const pr = x.product;
+      const why = (x.reasons || [])[0] || "종합 점수 상위";
+      lines.push(`${i + 1}. ${pr.name} (${won(pr.price)}) — ${why}`);
+    });
+    lines.push("제주 귤껍질을 업사이클한 미세플라스틱 프리 입자로 순하게 관리하세요.");
+  }
+  lines.push(NOT_MEDICAL);
+  return lines.join("\n");
 }
 
 function mockCopy(p) {

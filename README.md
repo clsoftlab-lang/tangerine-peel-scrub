@@ -65,9 +65,33 @@ Then point the front-end at it by setting `AI_ENDPOINT` in [`ai/config.js`](./ai
 export const AI_ENDPOINT = "http://localhost:8787/api/ai";
 ```
 
-- Model: **`claude-opus-5`**, adaptive thinking, streamed to the browser.
+- Model: **`claude-haiku-4-5`** by default (cost-first; raise via `AI_MODEL`), streamed to the browser.
 - With `AI_ENDPOINT` empty (the default, which `check.mjs` asserts), the app stays in mock mode.
 - **Keys are server-side only.** `ANTHROPIC_API_KEY` lives in `server/.env` (git-ignored) — **never** in the browser or the repo. `check.mjs` scans the tree for real key formats.
+
+## ⚙️ 고도화 — 무인·저비용 실 AI 연동
+
+The AI layer is upgraded for **autonomous (무인), cost-efficient real Claude** while every prior
+feature keeps working. Full details in [`server/README.md`](./server/README.md).
+
+- **Cost model** — default **`claude-haiku-4-5`** (**$1 / $5 per MTok** in/out) with **prompt caching**
+  (the stable per-task system prompt is sent as an `ephemeral` cache block, so repeated calls read
+  cache and cost less), modest per-task output caps (~700 tokens), and a **monthly token budget**
+  (`AI_MONTHLY_TOKEN_CAP`, default 2,000,000) plus a per-IP rate limit (20/min). Raise quality any
+  time with `AI_MODEL=claude-sonnet-5` or `claude-opus-5`.
+- **Rough cost** — a typical short task (~2K input + ~0.5K output) is about **$3–5 per 1,000 requests**,
+  driven lower by prompt caching. When the monthly cap is hit the proxy returns HTTP 429
+  `{fallback:true}`.
+- **Free one-deploy (무인)** — a **Cloudflare Workers** variant [`server/worker.js`](./server/worker.js)
+  (+ `wrangler.toml`) calls the Anthropic REST API with the same task routing / model / caching rules —
+  no server to babysit: `wrangler secret put ANTHROPIC_API_KEY` then `wrangler deploy`.
+- **Never breaks (무단 폴백)** — if the endpoint fails, returns 429 `{fallback:true}`, or the network
+  is down, `ai/ai.js` **auto-falls back to the offline mock**, so the app always responds.
+- **Autonomous feature** — the home page auto-generates a **"피부 맞춤 오늘의 추천 (계절 기반)"**
+  digest on load, built from the rule-based recommender via `askAI("digest", …)`. It works offline via
+  the mock and is labelled **not medical/dermatological advice**.
+
+**API keys are server-side only — never in the browser or repo.**
 
 ## Run locally
 
@@ -95,8 +119,9 @@ js/cart.js          # cart / subscription / upcycle-impact math (pure)
 js/storage.js       # localStorage wrapper (try/catch + reset)
 ai/config.js        # AI_ENDPOINT ("" = mock mode)
 ai/ai.js            # askAI(): Korean mock (reuses recommender) or streaming proxy
-server/index.mjs    # optional Node proxy → Claude (@anthropic-ai/sdk), keys server-side
-server/package.json / server/.env.example / server/README.md
+server/index.mjs    # optional Node proxy → Claude (cost-first haiku, caching, budget), keys server-side
+server/worker.js    # Cloudflare Workers variant (free, unmanned) → Anthropic REST
+server/wrangler.toml / server/package.json / server/.env.example / server/README.md
 data/products.json  # 24 fictional products
 data/content.json   # brand story, survey, sustainability, FAQ
 check.mjs           # dependency-free CI verifier (incl. AI key scan)

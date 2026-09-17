@@ -109,6 +109,13 @@ img, svg { max-width: 100%; }
 .hero-art { order: -1; text-align: center; }
 .hero-art svg { width: min(70%, 260px); }
 
+/* ---- 오늘의 추천(계절 기반 · 무단 자동) ---- */
+.today-rec { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1rem 1.1rem; margin: 1.25rem 0; box-shadow: var(--shadow); }
+.today-head { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
+.today-head h2 { font-size: 1.1rem; margin: 0; }
+.today-out { white-space: pre-wrap; word-break: break-word; margin: .6rem 0 .4rem; min-height: 1.4rem; }
+.today-out.streaming::after { content: "▍"; animation: ai-blink 1s steps(2, start) infinite; color: var(--accent); }
+
 /* ---- 스토리 ---- */
 .story-grid { display: grid; grid-template-columns: 1fr; gap: 1rem; margin: 1.5rem 0; }
 .story-card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.1rem; box-shadow: var(--shadow); }
