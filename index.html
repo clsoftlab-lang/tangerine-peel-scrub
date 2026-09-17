@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--
+  SPDX-License-Identifier: Apache-2.0
+  Copyright 2026 CLSOFTLAB (씨엘소프트랩), Dr. Lee Il-guk (이일국)
+-->
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>귤결 GyulGyeol — 제주 귤껍질 업사이클 스크럽</title>
+  <meta name="description" content="버려지던 제주 귤껍질을 업사이클한 미세플라스틱 프리·저자극·비건 페이스/바디 스크럽 브랜드 데모 스토어." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='22' r='14' fill='%23f7a13c'/%3E%3Cpath d='M20 9c1-3 4-4 6-4-1 3-3 5-6 5z' fill='%235a8a3a'/%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <div id="app">
+    <header class="site-header">
+      <a class="brand" href="#/home" aria-label="귤결 홈">
+        <span class="brand-logo"></span>
+        <span class="brand-name">귤결<small>GyulGyeol</small></span>
+      </a>
+      <nav id="nav" class="site-nav" aria-label="주요 메뉴">
+        <a data-nav="home" href="#/home">브랜드</a>
+        <a data-nav="catalog" href="#/catalog">제품</a>
+        <a data-nav="survey" href="#/survey">피부진단</a>
+        <a data-nav="sustainability" href="#/sustainability">지속가능성</a>
+      </nav>
+      <div class="header-actions">
+        <a class="icon-btn" data-nav="wishlist" href="#/wishlist" aria-label="찜 목록">♥<span id="wish-badge" class="badge" hidden>0</span></a>
+        <a class="icon-btn" data-nav="cart" href="#/cart" aria-label="장바구니">🛒<span id="cart-badge" class="badge" hidden>0</span></a>
+        <button id="reset-store" class="icon-btn" title="저장 데이터 초기화" aria-label="저장 데이터 초기화">⟲</button>
+      </div>
+    </header>
+
+    <p id="notice" class="demo-notice" role="note">데모 안내를 불러오는 중…</p>
+
+    <main id="view" class="view" aria-live="polite"><!-- 라우터가 채웁니다 --></main>
+
+    <footer class="site-footer">
+      <div class="foot-cols">
+        <div>
+          <strong>귤결 GyulGyeol</strong>
+          <p class="muted small">제주 귤껍질 업사이클 · 미세플라스틱 프리 · 비건</p>
+        </div>
+        <nav aria-label="바닥글 메뉴">
+          <a href="#/catalog">제품</a>
+          <a href="#/survey">피부진단</a>
+          <a href="#/sustainability">지속가능성</a>
+        </nav>
+      </div>
+      <p class="muted small copyright">
+        데모 · 가상 데이터. © 2026 CLSOFTLAB (씨엘소프트랩), Dr. Lee Il-guk (이일국). Apache-2.0.
+        <br>Not an official Anthropic product.
+      </p>
+    </footer>
+  </div>
+
+  <script type="module" src="./app.js"></script>
+</body>
+</html>

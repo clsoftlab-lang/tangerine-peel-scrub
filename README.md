@@ -1,0 +1,102 @@
+<!--
+SPDX-License-Identifier: Apache-2.0
+Copyright 2026 CLSOFTLAB (씨엘소프트랩), Dr. Lee Il-guk (이일국)
+-->
+
+# 귤결 GyulGyeol — Jeju Tangerine-Peel Scrub Shop (Demo)
+
+A working, no-build brand-commerce web app for an **upcycled Jeju tangerine-peel body/face scrub** — low-irritation, microplastic-free, made for sensitive skin. Runs as a static site (pure HTML + CSS + ES-module JS), deployable to GitHub Pages.
+
+한국어 문서: **[README.ko.md](./README.ko.md)**
+
+## 🍊 LIVE DEMO
+
+**https://clsoftlab-lang.github.io/tangerine-peel-scrub/**
+
+## What it is
+
+귤결 (GyulGyeol) turns discarded Jeju tangerine and hallabong peels — normally waste — into biodegradable scrub grains that replace plastic microbeads. This repo is a **front-end demo store** showing the full brand-commerce experience:
+
+- **Brand story** — Jeju peel upcycling, microplastic-free, vegan, circular packaging.
+- **Product catalog** — filter by use (face/body), skin type, scent, price; free-text search; sort by recommended/price/rating/reviews.
+- **Product detail** — ingredients, usage, vegan / microplastic-free / low-irritation badges, reviews.
+- **1-minute skin-type quiz** → rule-based product recommendations with human-readable reasons.
+- **Cart + simulated checkout**, **subscription** (정기구독, 10% off), **wishlist** (찜).
+- **Sustainability section** — live upcycle-impact counter (grams of peel diverted, tangerine equivalent).
+
+## How the skin-type recommender works
+
+Pure, explainable, rule-based scoring in [`js/recommender.js`](./js/recommender.js) (no ML, no network). The 1-minute quiz collects: skin type, use area (face/body/both), scent/irritation sensitivity, scent preference, vegan preference, and per-item budget. Each product is scored:
+
+1. **Skin-type match** — product lists your skin type → **+35**.
+2. **Use area** — `both` → +8; matching category → +20; mismatch → −12.
+3. **Sensitivity** — if *high*: unscented +14, low-irritation badge +10, microplastic-free +4, scented −8 (herb −4); if *low*: scented +4.
+4. **Scent preference** — exact match → +12.
+5. **Vegan preference** — vegan product → +6.
+6. **Budget** — over budget → −20; comfortably under (≤55%) → +4.
+7. **Rating** — small tie-break bonus (`rating × 0.7`).
+
+When area = `both`, a greedy pass guarantees at least one face and one body product in the top picks. Each recommendation returns the reasons that raised its score, shown in the UI. Fully unit-tested in `check.mjs` (skin-type match, both-area coverage, sensitivity effects, scent/budget effects).
+
+## Run locally
+
+No build step, no dependencies. Serve the folder over HTTP (ES modules need `http://`, not `file://`):
+
+```bash
+python -m http.server 9005
+# then open http://localhost:9005/
+```
+
+Run the checks (JSON parse, `node --check` on all JS, index containers, data integrity, recommender + cart unit tests):
+
+```bash
+node check.mjs
+```
+
+## Files
+
+```
+index.html          # app shell + nav + required containers
+styles.css          # mobile-first, light/dark via prefers-color-scheme
+app.js              # router + views + interactions (ES module)
+js/recommender.js   # rule-based skin-type recommender (unit-tested)
+js/cart.js          # cart / subscription / upcycle-impact math (pure)
+js/storage.js       # localStorage wrapper (try/catch + reset)
+data/products.json  # 24 fictional products
+data/content.json   # brand story, survey, sustainability, FAQ
+check.mjs           # dependency-free CI verifier
+.github/workflows/ci.yml
+README.md / README.ko.md / LICENSE / .gitignore
+```
+
+Demo counts: **24 products**, 2 categories (face/body), 5 skin types, 5 scents, 6-question quiz.
+
+## ⚠️ DEMO-MODE boundaries
+
+**This is a demonstration front-end only. Please read these boundaries:**
+
+- **All products, brands, ingredients, prices, reviews, ratings, and certifications are FICTIONAL.** Nothing here is a real product or medical/cosmetic claim.
+- **Payment and subscription are SIMULATED.** No money is charged, no order is placed, no shipment occurs.
+- **State lives in `localStorage`, which is NOT a real database.** Cart, wishlist, and subscriptions stay in your browser only; there is a reset button (⟲).
+- **No accounts, no login, no personal data (PII) is collected or transmitted.**
+- **A real build would add** a backend, a real product catalog and inventory, real payment/subscription processing, authentication, and verified sustainability/vegan certifications.
+- The skin-type quiz is a **rule-based demo suggestion, not medical or dermatological advice.**
+
+## 아이디어 출처 / Idea origin
+
+The seed idea came from the entrepreneurship class taught by **Dr. Lee Il-guk (이일국) at Yongin University (용인대학교)**. The students' startup ideas were exceptionally creative; this is one of the standout ideas from that class, finally brought to life as a working service — with admiration and gratitude to those students. **No student personal information is included.**
+
+## Contributors
+
+- Dr. Lee Il-guk (이일국)
+- LWJ
+- LMJ
+- Claude
+
+## License
+
+- Code: **Apache-2.0** — see [LICENSE](./LICENSE).
+- Documentation: **CC BY 4.0**.
+- SPDX headers: `Apache-2.0`, `Copyright 2026 CLSOFTLAB (씨엘소프트랩), Dr. Lee Il-guk (이일국)`.
+
+**Not an official Anthropic product.**

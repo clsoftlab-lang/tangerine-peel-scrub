@@ -1,0 +1,703 @@
+{
+  "brand": "귤결",
+  "brandEn": "GyulGyeol",
+  "updated": "2026-09-17",
+  "note": "가상의 데모 데이터입니다. 실제 제품·성분·후기가 아닙니다.",
+  "products": [
+    {
+      "id": "face-gentle-01",
+      "name": "제주 귤피 젠틀 페이스 스크럽",
+      "line": "젠틀",
+      "category": "face",
+      "skinTypes": ["민감성", "건성"],
+      "scent": "무향",
+      "price": 18000,
+      "size": "60g",
+      "rating": 4.7,
+      "reviewCount": 128,
+      "vegan": true,
+      "microplasticFree": true,
+      "grainSource": "제주 노지귤 껍질",
+      "peelGrams": 22,
+      "concerns": ["각질", "건조", "저자극"],
+      "ingredients": [
+        { "name": "귤피 분말", "role": "천연 각질 스크럽 입자" },
+        { "name": "제주 동백오일", "role": "보습 장벽 강화" },
+        { "name": "히알루론산", "role": "수분 공급" }
+      ],
+      "usage": "젖은 얼굴에 소량을 덜어 부드럽게 원을 그리며 30초 마사지 후 미온수로 헹굽니다. 주 2~3회.",
+      "description": "버려지던 제주 노지귤 껍질을 저온 분쇄해 만든 무향 저자극 페이스 스크럽. 미세플라스틱 대신 귤피 입자로 각질을 정돈합니다.",
+      "badges": ["비건", "미세플라스틱 프리", "저자극"],
+      "subscription": true,
+      "reviews": [
+        { "user": "익명1", "rating": 5, "text": "향이 없어 예민한 피부에도 자극이 없었어요." },
+        { "user": "익명2", "rating": 4, "text": "알갱이가 부드러워 매일 써도 괜찮네요." }
+      ]
+    },
+    {
+      "id": "body-citrus-01",
+      "name": "제주 귤피 시트러스 바디 스크럽",
+      "line": "데일리",
+      "category": "body",
+      "skinTypes": ["건성", "복합"],
+      "scent": "시트러스",
+      "price": 21000,
+      "size": "200g",
+      "rating": 4.6,
+      "reviewCount": 214,
+      "vegan": true,
+      "microplasticFree": true,
+      "grainSource": "제주 노지귤 껍질",
+      "peelGrams": 68,
+      "concerns": ["각질", "칙칙함", "보습"],
+      "ingredients": [
+        { "name": "귤피 분말", "role": "각질 스크럽 입자" },
+        { "name": "제주 감귤 껍질 오일", "role": "상큼한 시트러스 향" },
+        { "name": "시어버터", "role": "보습" }
+      ],
+      "usage": "샤워 후 젖은 몸에 마사지하듯 문지른 뒤 헹굽니다. 팔꿈치·무릎 집중. 주 2~3회.",
+      "description": "제주 귤 향이 은은하게 퍼지는 데일리 바디 스크럽. 매끈한 피부 결과 촉촉함을 동시에.",
+      "badges": ["비건", "미세플라스틱 프리"],
+      "subscription": true,
+      "reviews": [
+        { "user": "익명3", "rating": 5, "text": "샤워 후 향이 오래 남아 기분이 좋아요." },
+        { "user": "익명4", "rating": 4, "text": "각질 정리에 확실히 효과 있어요." }
+      ]
+    },
+    {
+      "id": "face-oil-02",
+      "name": "귤피 클리어 모공 페이스 스크럽",
+      "line": "클리어",
+      "category": "face",
+      "skinTypes": ["지성", "트러블성", "복합"],
+      "scent": "허브",
+      "price": 19500,
+      "size": "60g",
+      "rating": 4.4,
+      "reviewCount": 96,
+      "vegan": true,
+      "microplasticFree": true,
+      "grainSource": "제주 노지귤 껍질",
+      "peelGrams": 24,
+      "concerns": ["피지", "모공", "트러블"],
+      "ingredients": [
+        { "name": "귤피 분말", "role": "각질 스크럽 입자" },
+        { "name": "녹차 추출물", "role": "피지 진정" },
+        { "name": "티트리 워터", "role": "허브 향·진정" }
+      ],
+      "usage": "T존 위주로 부드럽게 마사지 후 헹굽니다. 주 2회 이내.",
+      "description": "번들거리는 지성·트러블 피부를 위한 허브 향 페이스 스크럽. 귤피 입자로 묵은 각질과 피지를 부드럽게.",
+      "badges": ["비건", "미세플라스틱 프리"],
+      "subscription": true,
+      "reviews": [
+        { "user": "익명5", "rating": 4, "text": "코 주변 각질이 정리돼요." }
+      ]
+    },
+    {
+      "id": "body-unscented-02",
+      "name": "제주 귤피 무향 순한 바디 스크럽",
+      "line": "젠틀",
+      "category": "body",
+      "skinTypes": ["민감성", "건성"],
+      "scent": "무향",
+      "price": 22000,
+      "size": "200g",
+      "rating": 4.8,
+      "reviewCount": 173,
+      "vegan": true,
+      "microplasticFree": true,
+      "grainSource": "제주 노지귤 껍질",
+      "peelGrams": 70,
+      "concerns": ["저자극", "각질", "건조"],
+      "ingredients": [
+        { "name": "귤피 분말", "role": "각질 스크럽 입자" },
+        { "name": "오트밀 추출물", "role": "진정 보습" },
+        { "name": "판테놀", "role": "장벽 강화" }
+      ],
+      "usage": "젖은 몸에 순하게 마사지 후 헹굽니다. 주 2~3회. 향료 무첨가.",
+      "description": "향에 민감한 분들을 위한 무향 저자극 바디 스크럽. 온 가족이 함께 쓰기 좋습니다.",
+      "badges": ["비건", "미세플라스틱 프리", "저자극"],
+      "subscription": true,
+      "reviews": [
+        { "user": "익명6", "rating": 5, "text": "아이와 함께 써도 안심돼요." },
+        { "user": "익명7", "rating": 5, "text": "무향이라 다른 제품과 겹치지 않아요." }
+      ]
+    },
+    {
+      "id": "face-bright-03",
+      "name": "귤피 브라이트닝 페이스 스크럽",
+      "line": "브라이트",
+      "category": "face",
+      "skinTypes": ["복합", "건성"],
+      "scent": "시트러스",
+      "price": 20500,
+      "size": "60g",
+      "rating": 4.5,
+      "reviewCount": 142,
+      "vegan": true,
+      "microplasticFree": true,
+      "grainSource": "제주 한라봉 껍질",
+      "peelGrams": 20,
+      "concerns": ["칙칙함", "각질", "톤업"],
+      "ingredients": [
+        { "name": "한라봉 껍질 분말", "role": "각질 스크럽 입자" },
+        { "name": "비타민C 유도체", "role": "생기 있는 톤" },
+        { "name": "글리세린", "role": "수분 유지" }
+      ],
+      "usage": "얼굴 전체에 부드럽게 마사지 후 헹굽니다. 주 2회.",
+      "description": "제주 한라봉 껍질을 업사이클한 시트러스 향 브라이트닝 스크럽으로 칙칙한 피부에 생기를.",
+      "badges": ["비건", "미세플라스틱 프리"],
+      "subscription": true,
+      "reviews": [
+        { "user": "익명8", "rating": 5, "text": "쓰고 나면 얼굴이 화사해 보여요." }
+      ]
+    },
+    {
+      "id": "body-floral-03",
+      "name": "귤피 플로럴 실키 바디 스크럽",
+      "line": "실키",
+      "category": "body",
+      "skinTypes": ["건성", "복합"],
+      "scent": "플로럴",
+      "price": 24000,
+      "size": "220g",
+      "rating": 4.3,
+      "reviewCount": 87,
+      "vegan": true,
+      "microplasticFree": true,
+      "grainSource": "제주 노지귤 껍질",
+      "peelGrams": 66,
+      "concerns": ["보습", "각질", "향"],
+      "ingredients": [
+        { "name": "귤피 분말", "role": "각질 스크럽 입자" },
+        { "name": "제주 유채꽃 추출물", "role": "플로럴 향" },
+        { "name": "호호바오일", "role": "실키 보습" }
+      ],
+      "usage": "젖은 몸에 마사지 후 헹구면 은은한 꽃향이 남습니다. 주 2회.",
+      "description": "제주 유채꽃의 플로럴 향과 귤피 입자가 만난 실키 바디 스크럽.",
+      "badges": ["비건", "미세플라스틱 프리"],
+      "subscription": true,
+      "reviews": [
+        { "user": "익명9", "rating": 4, "text": "향이 과하지 않아 데일리로 좋아요." }
+      ]
+    },
+    {
+      "id": "face-cream-04",
+      "name": "귤피 크림 페이스 스크럽 (건성용)",
+      "line": "크림",
+      "category": "face",
+      "skinTypes": ["건성", "민감성"],
+      "scent": "무향",
+      "price": 21000,
+      "size": "70g",
+      "rating": 4.6,
+      "reviewCount": 110,
+      "vegan": true,
+      "microplasticFree": true,
+      "grainSource": "제주 노지귤 껍질",
+      "peelGrams": 21,
+      "concerns": ["건조", "저자극", "각질"],
+      "ingredients": [
+        { "name": "귤피 분말", "role": "고운 각질 스크럽 입자" },
+        { "name": "세라마이드", "role": "장벽 보강" },
+        { "name": "스쿠알란", "role": "고보습" }
+      ],
+      "usage": "크림 제형을 얼굴에 펴 바른 뒤 부드럽게 마사지, 미온수로 헹굽니다. 주 2회.",
+      "description": "당기는 건성 피부를 위한 크림 제형 무향 스크럽. 각질 정리 후에도 촉촉함이 유지됩니다.",
+      "badges": ["비건", "미세플라스틱 프리", "저자극"],
+      "subscription": true,
+      "reviews": [
+        { "user": "익명10", "rating": 5, "text": "건조한 겨울에 딱이에요." }
+      ]
+    },
+    {
+      "id": "body-woody-04",
+      "name": "귤피 우디 릴랙스 바디 스크럽",
+      "line": "릴랙스",
+      "category": "body",
+      "skinTypes": ["복합", "지성"],
+      "scent": "우디",
+      "price": 23000,
+      "size": "200g",
+      "rating": 4.4,
+      "reviewCount": 74,
+      "vegan": true,
+      "microplasticFree": true,
+      "grainSource": "제주 노지귤 껍질",
+      "peelGrams": 65,
+      "concerns": ["각질", "향", "릴랙스"],
+      "ingredients": [
+        { "name": "귤피 분말", "role": "각질 스크럽 입자" },
+        { "name": "제주 편백 추출물", "role": "우디 향" },
+        { "name": "시어버터", "role": "보습" }
+      ],
+      "usage": "저녁 샤워 시 마사지 후 헹굽니다. 은은한 나무 향으로 하루를 마무리. 주 2~3회.",
+      "description": "제주 편백의 우디 향이 어우러진 릴랙스 바디 스크럽.",
+      "badges": ["비건", "미세플라스틱 프리"],
+      "subscription": true,
+      "reviews": [
+        { "user": "익명11", "rating": 4, "text": "자기 전에 쓰면 마음이 편안해져요." }
+      ]
+    },
+    {
+      "id": "face-mini-05",
+      "name": "귤피 트래블 미니 페이스 스크럽",
+      "line": "미니",
+      "category": "face",
+      "skinTypes": ["복합", "지성", "건성"],
+      "scent": "시트러스",
+      "price": 9500,
+      "size": "25g",
+      "rating": 4.2,
+      "reviewCount": 58,
+      "vegan": true,
+      "microplasticFree": true,
+      "grainSource": "제주 노지귤 껍질",
+      "peelGrams": 9,
+      "concerns": ["각질", "휴대"],
+      "ingredients": [
+        { "name": "귤피 분말", "role": "각질 스크럽 입자" },
+        { "name": "감귤 껍질 오일", "role": "시트러스 향" }
+      ],
+      "usage": "여행·출장 시 얼굴에 소량 마사지 후 헹굽니다. 주 2회.",
+      "description": "가볍게 챙기는 휴대용 미니 페이스 스크럽. 첫 사용자 입문용으로도 좋습니다.",
+      "badges": ["비건", "미세플라스틱 프리"],
+      "subscription": false,
+      "reviews": [
+        { "user": "익명12", "rating": 4, "text": "여행 갈 때 부담 없이 챙겨요." }
+      ]
+    },
+    {
+      "id": "body-mini-05",
+      "name": "귤피 트래블 미니 바디 스크럽",
+      "line": "미니",
+      "category": "body",
+      "skinTypes": ["복합", "건성"],
+      "scent": "무향",
+      "price": 11000,
+      "size": "60g",
+      "rating": 4.1,
+      "reviewCount": 41,
+      "vegan": true,
+      "microplasticFree": true,
+      "grainSource": "제주 노지귤 껍질",
+      "peelGrams": 20,
+      "concerns": ["각질", "휴대", "저자극"],
+      "ingredients": [
+        { "name": "귤피 분말", "role": "각질 스크럽 입자" },
+        { "name": "판테놀", "role": "진정 보습" }
+      ],
+      "usage": "여행 시 젖은 몸에 마사지 후 헹굽니다. 주 2~3회.",
+      "description": "무향 저자극 휴대용 바디 스크럽. 짐 가방을 가볍게.",
+      "badges": ["비건", "미세플라스틱 프리", "저자극"],
+      "subscription": false,
+      "reviews": [
+        { "user": "익명13", "rating": 4, "text": "작지만 알차요." }
+      ]
+    },
+    {
+      "id": "face-enzyme-06",
+      "name": "귤피 효소 파우더 페이스 스크럽",
+      "line": "효소",
+      "category": "face",
+      "skinTypes": ["복합", "지성", "트러블성"],
+      "scent": "무향",
+      "price": 26000,
+      "size": "50g",
+      "rating": 4.7,
+      "reviewCount": 133,
+      "vegan": true,
+      "microplasticFree": true,
+      "grainSource": "제주 한라봉 껍질",
+      "peelGrams": 16,
+      "concerns": ["각질", "모공", "저자극"],
+      "ingredients": [
+        { "name": "한라봉 껍질 분말", "role": "고운 각질 입자" },
+        { "name": "파파야 효소", "role": "묵은 각질 분해" },
+        { "name": "알로에 분말", "role": "진정" }
+      ],
+      "usage": "파우더에 물을 섞어 거품 내 마사지 후 헹굽니다. 주 2회.",
+      "description": "물과 섞어 쓰는 효소 파우더 타입. 자극은 낮추고 각질 정돈력은 높였습니다.",
+      "badges": ["비건", "미세플라스틱 프리", "저자극"],
+      "subscription": true,
+      "reviews": [
+        { "user": "익명14", "rating": 5, "text": "파우더라 보관이 편하고 순해요." }
+      ]
+    },
+    {
+      "id": "body-coffee-06",
+      "name": "귤피 커피 바디 스크럽",
+      "line": "에너지",
+      "category": "body",
+      "skinTypes": ["지성", "복합"],
+      "scent": "우디",
+      "price": 20000,
+      "size": "200g",
+      "rating": 4.3,
+      "reviewCount": 92,
+      "vegan": true,
+      "microplasticFree": true,
+      "grainSource": "제주 노지귤 껍질 + 업사이클 커피박",
+      "peelGrams": 55,
+      "concerns": ["각질", "탄력", "향"],
+      "ingredients": [
+        { "name": "귤피 분말", "role": "각질 스크럽 입자" },
+        { "name": "업사이클 커피박", "role": "각질·마사지 입자" },
+        { "name": "카페인 추출물", "role": "탄력 케어" }
+      ],
+      "usage": "젖은 몸에 마사지하며 순환을 자극한 뒤 헹굽니다. 주 2회.",
+      "description": "카페에서 버려진 커피박과 귤피를 함께 업사이클한 바디 스크럽.",
+      "badges": ["비건", "미세플라스틱 프리", "이중 업사이클"],
+      "subscription": true,
+      "reviews": [
+        { "user": "익명15", "rating": 4, "text": "커피 향이 은은하게 나서 좋아요." }
+      ]
+    },
+    {
+      "id": "face-night-07",
+      "name": "귤피 나이트 리페어 페이스 스크럽",
+      "line": "나이트",
+      "category": "face",
+      "skinTypes": ["건성", "복합", "민감성"],
+      "scent": "허브",
+      "price": 25000,
+      "size": "60g",
+      "rating": 4.6,
+      "reviewCount": 101,
+      "vegan": true,
+      "microplasticFree": true,
+      "grainSource": "제주 노지귤 껍질",
+      "peelGrams": 21,
+      "concerns": ["각질", "건조", "저자극"],
+      "ingredients": [
+        { "name": "귤피 분말", "role": "각질 스크럽 입자" },
+        { "name": "라벤더 워터", "role": "허브 향·진정" },
+        { "name": "마데카소사이드", "role": "야간 진정" }
+      ],
+      "usage": "자기 전 얼굴에 부드럽게 마사지 후 헹굽니다. 주 2회.",
+      "description": "잠들기 전 순하게 각질을 정리하는 허브 향 나이트 스크럽.",
+      "badges": ["비건", "미세플라스틱 프리", "저자극"],
+      "subscription": true,
+      "reviews": [
+        { "user": "익명16", "rating": 5, "text": "라벤더 향에 잠이 잘 와요." }
+      ]
+    },
+    {
+      "id": "body-sensitive-07",
+      "name": "귤피 시카 진정 바디 스크럽",
+      "line": "시카",
+      "category": "body",
+      "skinTypes": ["민감성", "트러블성"],
+      "scent": "무향",
+      "price": 25000,
+      "size": "200g",
+      "rating": 4.8,
+      "reviewCount": 156,
+      "vegan": true,
+      "microplasticFree": true,
+      "grainSource": "제주 노지귤 껍질",
+      "peelGrams": 63,
+      "concerns": ["저자극", "트러블", "진정"],
+      "ingredients": [
+        { "name": "귤피 분말", "role": "고운 각질 입자" },
+        { "name": "센텔라 추출물", "role": "진정" },
+        { "name": "판테놀", "role": "장벽 강화" }
+      ],
+      "usage": "예민한 부위는 살살, 팔·다리 위주로 마사지 후 헹굽니다. 주 1~2회.",
+      "description": "등·팔의 좁쌀 트러블까지 배려한 무향 시카 진정 바디 스크럽.",
+      "badges": ["비건", "미세플라스틱 프리", "저자극"],
+      "subscription": true,
+      "reviews": [
+        { "user": "익명17", "rating": 5, "text": "등 트러블이 있는데 순해서 계속 써요." }
+      ]
+    },
+    {
+      "id": "face-vitc-08",
+      "name": "귤피 비타 글로우 페이스 스크럽",
+      "line": "글로우",
+      "category": "face",
+      "skinTypes": ["복합", "지성"],
+      "scent": "시트러스",
+      "price": 22500,
+      "size": "60g",
+      "rating": 4.4,
+      "reviewCount": 79,
+      "vegan": true,
+      "microplasticFree": true,
+      "grainSource": "제주 한라봉 껍질",
+      "peelGrams": 18,
+      "concerns": ["칙칙함", "각질", "톤업"],
+      "ingredients": [
+        { "name": "한라봉 껍질 분말", "role": "각질 스크럽 입자" },
+        { "name": "감귤 비타민 복합물", "role": "생기 부여" },
+        { "name": "나이아신아마이드", "role": "톤 케어" }
+      ],
+      "usage": "아침 세안 시 얼굴에 마사지 후 헹굽니다. 주 2회.",
+      "description": "칙칙한 아침 피부에 생기를 더하는 시트러스 비타 글로우 스크럽.",
+      "badges": ["비건", "미세플라스틱 프리"],
+      "subscription": true,
+      "reviews": [
+        { "user": "익명18", "rating": 4, "text": "아침에 쓰면 화장이 잘 먹어요." }
+      ]
+    },
+    {
+      "id": "body-salt-08",
+      "name": "귤피 솔트 딥클렌 바디 스크럽",
+      "line": "딥클렌",
+      "category": "body",
+      "skinTypes": ["지성", "복합"],
+      "scent": "허브",
+      "price": 19000,
+      "size": "240g",
+      "rating": 4.2,
+      "reviewCount": 66,
+      "vegan": true,
+      "microplasticFree": true,
+      "grainSource": "제주 노지귤 껍질 + 제주 소금",
+      "peelGrams": 58,
+      "concerns": ["각질", "피지", "딥클렌징"],
+      "ingredients": [
+        { "name": "귤피 분말", "role": "각질 스크럽 입자" },
+        { "name": "제주 소금", "role": "딥클렌징 입자" },
+        { "name": "로즈마리 추출물", "role": "허브 향" }
+      ],
+      "usage": "각질이 두꺼운 부위 위주로 마사지 후 헹굽니다. 주 1~2회.",
+      "description": "제주 소금과 귤피를 더한 딥클렌 바디 스크럽. 여름철 끈적임 케어에.",
+      "badges": ["비건", "미세플라스틱 프리"],
+      "subscription": true,
+      "reviews": [
+        { "user": "익명19", "rating": 4, "text": "개운함이 확실해요." }
+      ]
+    },
+    {
+      "id": "face-balm-09",
+      "name": "귤피 밤 투 스크럽 (클렌징)",
+      "line": "밤",
+      "category": "face",
+      "skinTypes": ["건성", "민감성", "복합"],
+      "scent": "시트러스",
+      "price": 27000,
+      "size": "80g",
+      "rating": 4.5,
+      "reviewCount": 88,
+      "vegan": true,
+      "microplasticFree": true,
+      "grainSource": "제주 노지귤 껍질",
+      "peelGrams": 19,
+      "concerns": ["클렌징", "각질", "건조"],
+      "ingredients": [
+        { "name": "귤피 분말", "role": "고운 각질 입자" },
+        { "name": "감귤 클렌징 밤 베이스", "role": "메이크업 클렌징" },
+        { "name": "동백오일", "role": "보습" }
+      ],
+      "usage": "밤을 얼굴에 녹이며 클렌징 후, 물을 더해 스크럽으로 전환해 마사지 후 헹굽니다. 주 2회.",
+      "description": "클렌징 밤이 물을 만나 스크럽으로 바뀌는 2-in-1 제형. 건성에게 순한 각질 케어.",
+      "badges": ["비건", "미세플라스틱 프리"],
+      "subscription": true,
+      "reviews": [
+        { "user": "익명20", "rating": 5, "text": "클렌징과 각질을 한 번에 해결해요." }
+      ]
+    },
+    {
+      "id": "body-gel-09",
+      "name": "귤피 젤 쿨링 바디 스크럽",
+      "line": "쿨링",
+      "category": "body",
+      "skinTypes": ["지성", "복합", "트러블성"],
+      "scent": "허브",
+      "price": 20500,
+      "size": "210g",
+      "rating": 4.3,
+      "reviewCount": 70,
+      "vegan": true,
+      "microplasticFree": true,
+      "grainSource": "제주 노지귤 껍질",
+      "peelGrams": 60,
+      "concerns": ["각질", "쿨링", "여름"],
+      "ingredients": [
+        { "name": "귤피 분말", "role": "각질 스크럽 입자" },
+        { "name": "멘톨", "role": "쿨링감" },
+        { "name": "페퍼민트 워터", "role": "허브 향" }
+      ],
+      "usage": "여름철 젖은 몸에 마사지하면 시원함이 느껴집니다. 주 2회.",
+      "description": "끈적이는 여름을 위한 젤 타입 쿨링 바디 스크럽.",
+      "badges": ["비건", "미세플라스틱 프리"],
+      "subscription": true,
+      "reviews": [
+        { "user": "익명21", "rating": 4, "text": "여름에 쓰면 정말 시원해요." }
+      ]
+    },
+    {
+      "id": "face-rich-10",
+      "name": "귤피 리치 뉴트리 페이스 스크럽",
+      "line": "뉴트리",
+      "category": "face",
+      "skinTypes": ["건성", "민감성"],
+      "scent": "플로럴",
+      "price": 28000,
+      "size": "70g",
+      "rating": 4.6,
+      "reviewCount": 64,
+      "vegan": true,
+      "microplasticFree": true,
+      "grainSource": "제주 노지귤 껍질",
+      "peelGrams": 21,
+      "concerns": ["건조", "영양", "각질"],
+      "ingredients": [
+        { "name": "귤피 분말", "role": "고운 각질 입자" },
+        { "name": "제주 유채꿀 추출물", "role": "영양 공급" },
+        { "name": "세라마이드", "role": "장벽 보강" }
+      ],
+      "usage": "건조한 계절 저녁 세안 시 마사지 후 헹굽니다. 주 2회.",
+      "description": "영양이 필요한 건성 피부를 위한 리치 제형 플로럴 스크럽.",
+      "badges": ["비건", "미세플라스틱 프리", "저자극"],
+      "subscription": true,
+      "reviews": [
+        { "user": "익명22", "rating": 5, "text": "쓰고 나면 피부가 부드러워요." }
+      ]
+    },
+    {
+      "id": "body-milk-10",
+      "name": "귤피 오트밀크 바디 스크럽",
+      "line": "밀크",
+      "category": "body",
+      "skinTypes": ["건성", "민감성"],
+      "scent": "플로럴",
+      "price": 23500,
+      "size": "220g",
+      "rating": 4.7,
+      "reviewCount": 118,
+      "vegan": true,
+      "microplasticFree": true,
+      "grainSource": "제주 노지귤 껍질",
+      "peelGrams": 67,
+      "concerns": ["건조", "저자극", "각질"],
+      "ingredients": [
+        { "name": "귤피 분말", "role": "각질 스크럽 입자" },
+        { "name": "오트밀크", "role": "진정 보습" },
+        { "name": "글리세린", "role": "수분 유지" }
+      ],
+      "usage": "젖은 몸에 마사지 후 헹구면 촉촉함이 남습니다. 주 2~3회.",
+      "description": "우유처럼 부드러운 오트밀크 베이스의 건성·민감성용 바디 스크럽.",
+      "badges": ["비건", "미세플라스틱 프리", "저자극"],
+      "subscription": true,
+      "reviews": [
+        { "user": "익명23", "rating": 5, "text": "각질 케어인데 로션 바른 것처럼 촉촉해요." }
+      ]
+    },
+    {
+      "id": "face-charcoal-11",
+      "name": "귤피 차콜 디톡스 페이스 스크럽",
+      "line": "디톡스",
+      "category": "face",
+      "skinTypes": ["지성", "트러블성"],
+      "scent": "우디",
+      "price": 21500,
+      "size": "60g",
+      "rating": 4.2,
+      "reviewCount": 53,
+      "vegan": true,
+      "microplasticFree": true,
+      "grainSource": "제주 노지귤 껍질",
+      "peelGrams": 23,
+      "concerns": ["피지", "모공", "각질"],
+      "ingredients": [
+        { "name": "귤피 분말", "role": "각질 스크럽 입자" },
+        { "name": "대나무 차콜", "role": "노폐물 흡착" },
+        { "name": "편백 워터", "role": "우디 향" }
+      ],
+      "usage": "T존 위주로 마사지 후 헹굽니다. 주 2회 이내.",
+      "description": "번들거리는 피부의 모공 속 노폐물까지 케어하는 차콜 디톡스 스크럽.",
+      "badges": ["비건", "미세플라스틱 프리"],
+      "subscription": false,
+      "reviews": [
+        { "user": "익명24", "rating": 4, "text": "개운하게 씻기는 느낌이에요." }
+      ]
+    },
+    {
+      "id": "body-honey-11",
+      "name": "귤피 허니 글로우 바디 스크럽",
+      "line": "글로우",
+      "category": "body",
+      "skinTypes": ["건성", "복합"],
+      "scent": "시트러스",
+      "price": 22000,
+      "size": "200g",
+      "rating": 4.5,
+      "reviewCount": 95,
+      "vegan": true,
+      "microplasticFree": true,
+      "grainSource": "제주 한라봉 껍질",
+      "peelGrams": 62,
+      "concerns": ["각질", "칙칙함", "보습"],
+      "ingredients": [
+        { "name": "한라봉 껍질 분말", "role": "각질 스크럽 입자" },
+        { "name": "제주 유채꿀 추출물", "role": "보습·윤기" },
+        { "name": "감귤 껍질 오일", "role": "시트러스 향" }
+      ],
+      "usage": "젖은 몸에 마사지 후 헹굽니다. 주 2~3회.",
+      "description": "제주 한라봉과 유채꿀로 윤기를 더하는 시트러스 바디 스크럽.",
+      "badges": ["비건", "미세플라스틱 프리"],
+      "subscription": true,
+      "reviews": [
+        { "user": "익명25", "rating": 5, "text": "피부에 윤기가 도는 느낌이에요." }
+      ]
+    },
+    {
+      "id": "face-set-12",
+      "name": "귤피 페이스 듀오 세트 (젠틀+글로우)",
+      "line": "세트",
+      "category": "face",
+      "skinTypes": ["복합", "건성", "민감성"],
+      "scent": "무향",
+      "price": 34000,
+      "size": "60g x2",
+      "rating": 4.7,
+      "reviewCount": 47,
+      "vegan": true,
+      "microplasticFree": true,
+      "grainSource": "제주 노지귤 껍질",
+      "peelGrams": 42,
+      "concerns": ["각질", "선물", "구성"],
+      "ingredients": [
+        { "name": "귤피 분말", "role": "각질 스크럽 입자" },
+        { "name": "젠틀+글로우 2종", "role": "아침·저녁 루틴" }
+      ],
+      "usage": "아침엔 글로우, 저녁엔 젠틀로 나눠 사용합니다. 주 2~3회.",
+      "description": "아침·저녁 루틴을 위한 페이스 스크럽 듀오 세트. 선물용으로도 좋습니다.",
+      "badges": ["비건", "미세플라스틱 프리", "저자극"],
+      "subscription": false,
+      "reviews": [
+        { "user": "익명26", "rating": 5, "text": "선물했더니 반응이 좋았어요." }
+      ]
+    },
+    {
+      "id": "body-set-12",
+      "name": "귤피 바디 트리오 세트 (시트러스+무향+플로럴)",
+      "line": "세트",
+      "category": "body",
+      "skinTypes": ["건성", "복합", "민감성"],
+      "scent": "시트러스",
+      "price": 52000,
+      "size": "200g x3",
+      "rating": 4.8,
+      "reviewCount": 39,
+      "vegan": true,
+      "microplasticFree": true,
+      "grainSource": "제주 노지귤 껍질",
+      "peelGrams": 198,
+      "concerns": ["각질", "선물", "구성"],
+      "ingredients": [
+        { "name": "귤피 분말", "role": "각질 스크럽 입자" },
+        { "name": "3종 향 구성", "role": "취향별 선택" }
+      ],
+      "usage": "기분·계절에 따라 세 가지 향을 번갈아 사용합니다. 주 2~3회.",
+      "description": "세 가지 향을 한 번에 즐기는 바디 스크럽 트리오 세트.",
+      "badges": ["비건", "미세플라스틱 프리"],
+      "subscription": true,
+      "reviews": [
+        { "user": "익명27", "rating": 5, "text": "향 골라 쓰는 재미가 있어요." }
+      ]
+    }
+  ]
+}

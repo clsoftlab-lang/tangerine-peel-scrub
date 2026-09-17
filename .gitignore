@@ -1,0 +1,18 @@
+# SPDX-License-Identifier: Apache-2.0
+# Dependencies
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Build / temp
+dist/
+.cache/
+*.tmp
